@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechYatri | Admin Dashboard</title>
+    <link rel="icon" href="icons/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Admin Styles -->
+    <link rel="stylesheet" href="css/admin.css">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+
+    <!-- Admin Authentication Overlay -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-card">
+            <div class="logo-area">
+                <span>Tech</span>Yatri Admin
+            </div>
+            <p>Enter your administrator passcode to access the management portal.</p>
+            <form id="adminLoginForm" onsubmit="return false;">
+                <div class="form-group" style="text-align: left;">
+                    <label for="adminPasscode">Admin Passcode</label>
+                    <input type="password" id="adminPasscode" class="form-control" placeholder="Default: admin123" required autofocus autocomplete="current-password">
+                </div>
+                <div id="loginError" style="color: #ef4444; font-size: 0.85rem; margin-bottom: 1rem; display: none;">
+                    <i class="fas fa-exclamation-circle"></i> Invalid passcode. Try default: <b>admin123</b>
+                </div>
+                <button type="submit" id="adminLoginBtn" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-lock-open"></i> Unlock Dashboard
+                </button>
+            </form>
+            <div style="margin-top: 1.25rem;">
+                <a href="index.html" style="color: var(--gray-500); font-size: 0.85rem; text-decoration: none;">
+                    <i class="fas fa-arrow-left"></i> Return to Website
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Main Admin Container -->
+    <div class="admin-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: #4f46e5; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-terminal" style="color: white; font-size: 1.1rem;"></i>
+                </div>
+                <div>
+                    <h1 style="font-size: 1.1rem; line-height: 1.2;">TechYatri</h1>
+                    <span style="font-size: 0.75rem; color: var(--gray-400);">Admin Portal</span>
+                </div>
+            </div>
+
+            <nav style="display: flex; flex-direction: column; gap: 0.35rem;">
+                <a href="#overview" class="nav-item active" data-tab="overview">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#skills" class="nav-item" data-tab="skills">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Skills / Tech Stack</span>
+                </a>
+                <a href="#projects" class="nav-item" data-tab="projects">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Projects</span>
+                </a>
+                <a href="#videos" class="nav-item" data-tab="videos">
+                    <i class="fas fa-video"></i>
+                    <span>Videos & Tutorials</span>
+                </a>
+            </nav>
+
+            <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; border-top: 1px solid var(--gray-700); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                <a href="index.html" target="_blank" class="nav-item" style="padding: 0.5rem 0.75rem;">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Live Website</span>
+                </a>
+                <a href="#" id="logoutBtn" class="nav-item" style="color: #f87171; padding: 0.5rem 0.75rem;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Lock / Log Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="admin-topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="pageHeading" style="font-size: 1.25rem; font-weight: 600; color: var(--gray-900);">Dashboard Overview</h2>
+                </div>
+                <div class="topbar-right">
+                    <button id="quickSeedBtn" class="btn" style="background: var(--gray-100); color: var(--gray-700); font-size: 0.85rem;" title="Import existing website items to database if empty">
+                        <i class="fas fa-database"></i> Seed Default Data
+                    </button>
+                    <a href="index.html" target="_blank" class="btn btn-primary" style="font-size: 0.85rem;">
+                        <i class="fas fa-eye"></i> View Site
+                    </a>
+                </div>
+            </header>
+
+            <!-- SECTION 1: OVERVIEW -->
+            <section id="overviewSection" class="admin-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Skills & Technologies</h3>
+                        <div class="value" id="statsSkillsCount">0</div>
+                        <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 0.5rem;">
+                            <a href="#skills" class="nav-link-trigger" data-tab="skills" style="color: var(--primary); text-decoration: none;">Manage skills &rarr;</a>
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Code Projects</h3>
+                        <div class="value" id="statsProjectsCount">0</div>
+                        <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 0.5rem;">
+                            <a href="#projects" class="nav-link-trigger" data-tab="projects" style="color: var(--primary); text-decoration: none;">Manage projects &rarr;</a>
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Video Links</h3>
+                        <div class="value" id="statsVideosCount">0</div>
+                        <p style="font-size: 0.8rem; color: var(--gray-500); margin-top: 0.5rem;">
+                            <a href="#videos" class="nav-link-trigger" data-tab="videos" style="color: var(--primary); text-decoration: none;">Manage videos &rarr;</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Quick Actions</h3>
+                    </div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary" id="quickAddSkillBtn">
+                            <i class="fas fa-plus"></i> Add New Skill
+                        </button>
+                        <button class="btn btn-primary" id="quickAddProjectBtn" style="background-color: #059669;">
+                            <i class="fas fa-folder-plus"></i> Add New Project
+                        </button>
+                        <button class="btn btn-primary" id="quickAddVideoBtn" style="background-color: #dc2626;">
+                            <i class="fab fa-youtube"></i> Add New Video Link
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 class="card-title">Live Sync Status</h3>
+                        <span id="rtdbConnectionStatus" style="font-weight: 600; font-size: 0.85rem; color: #f59e0b;">○ Connecting...</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        Database: <strong>Firebase Realtime Database</strong> | Project: <code id="currentFirebaseProjectId">loading...</code>
+                    </p>
+                    <p style="color: var(--gray-600); font-size: 0.85rem;">
+                        All changes made in this panel sync automatically in real-time with the TechYatri homepage, projects, and videos.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 2: SKILLS / TECH STACK -->
+            <section id="skillsSection" class="admin-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Skills & Tech Radar</h3>
+                        <button class="btn btn-primary" id="openAddSkillModal">
+                            <i class="fas fa-plus"></i> Add Skill
+                        </button>
+                    </div>
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="skillsSearch" placeholder="Search skills by name...">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 70px;">Icon</th>
+                                    <th>Skill / Technology</th>
+                                    <th>Proficiency</th>
+                                    <th style="width: 130px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="skillsTableBody">
+                                <!-- Populated dynamically by admin.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: PROJECTS -->
+            <section id="projectsSection" class="admin-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Projects Portfolio</h3>
+                        <button class="btn btn-primary" id="openAddProjectModal">
+                            <i class="fas fa-plus"></i> Add Project
+                        </button>
+                    </div>
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="projectsSearch" placeholder="Search projects by title or tech stack...">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 70px;">Preview</th>
+                                    <th>Title & Description</th>
+                                    <th>Tech Stack</th>
+                                    <th>Links</th>
+                                    <th style="width: 130px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projectsTableBody">
+                                <!-- Populated dynamically by admin.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: VIDEOS -->
+            <section id="videosSection" class="admin-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Video Links & Tutorials</h3>
+                        <button class="btn btn-primary" id="openAddVideoModal">
+                            <i class="fab fa-youtube"></i> Add Video Link
+                        </button>
+                    </div>
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="videosSearch" placeholder="Search videos by title or category...">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 90px;">Thumbnail</th>
+                                    <th>Title & Info</th>
+                                    <th>Category</th>
+                                    <th>Stats</th>
+                                    <th>Video Link</th>
+                                    <th style="width: 130px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="videosTableBody">
+                                <!-- Populated dynamically by admin.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Modal: Add / Edit Skill -->
+    <div id="skillModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="skillModalTitle" style="font-size: 1.2rem; font-weight: 600;">Add New Skill</h3>
+                <button class="modal-close" data-close="skillModal">&times;</button>
+            </div>
+            <form id="skillForm">
+                <input type="hidden" id="skillDocId">
+                <div class="form-group">
+                    <label for="skillName">Technology / Skill Name *</label>
+                    <input type="text" id="skillName" class="form-control" placeholder="e.g. Python, React, Docker" required>
+                </div>
+                <div class="form-group">
+                    <label for="skillIcon">Icon Path or Image URL</label>
+                    <input type="text" id="skillIcon" class="form-control" placeholder="e.g. icons/python.svg or image URL">
+                    <small style="color: var(--gray-500); font-size: 0.75rem;">Default icons in icons/ folder: <code>icons/python.svg</code>, <code>icons/javascript.svg</code>, <code>icons/physics.png</code></small>
+                </div>
+                <div class="form-group">
+                    <label for="skillProgress">Proficiency: <span id="skillProgressValue" style="font-weight: 700; color: var(--primary);">85</span>%</label>
+                    <input type="range" id="skillProgress" min="10" max="100" value="85" class="form-control" style="cursor: pointer;">
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn" data-close="skillModal" style="background: var(--gray-200); color: var(--gray-700);">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveSkillBtn">Save Skill</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Project -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="projectModalTitle" style="font-size: 1.2rem; font-weight: 600;">Add New Project</h3>
+                <button class="modal-close" data-close="projectModal">&times;</button>
+            </div>
+            <form id="projectForm">
+                <input type="hidden" id="projectDocId">
+                <div class="form-group">
+                    <label for="projectTitle">Project Title *</label>
+                    <input type="text" id="projectTitle" class="form-control" placeholder="e.g. AI-Powered Code Summarizer" required>
+                </div>
+                <div class="form-group">
+                    <label for="projectDescription">Short Description *</label>
+                    <textarea id="projectDescription" class="form-control" rows="3" placeholder="Brief summary of what this project does..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectImage">Cover Image URL or Path</label>
+                    <input type="text" id="projectImage" class="form-control" placeholder="e.g. images/password_manager.jpeg or https://...">
+                </div>
+                <div class="form-group">
+                    <label for="projectTechStack">Tech Stack (comma-separated) *</label>
+                    <input type="text" id="projectTechStack" class="form-control" placeholder="e.g. Python, Selenium, Pandas" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="projectTutorialLink">Tutorial Video Link</label>
+                        <input type="url" id="projectTutorialLink" class="form-control" placeholder="https://youtube.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectCodeLink">GitHub / Source Code Link</label>
+                        <input type="url" id="projectCodeLink" class="form-control" placeholder="https://github.com/...">
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn" data-close="projectModal" style="background: var(--gray-200); color: var(--gray-700);">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveProjectBtn">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Video -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="videoModalTitle" style="font-size: 1.2rem; font-weight: 600;">Add New Video Link</h3>
+                <button class="modal-close" data-close="videoModal">&times;</button>
+            </div>
+            <form id="videoForm">
+                <input type="hidden" id="videoDocId">
+                <div class="form-group">
+                    <label for="videoUrl">YouTube Video or Short URL *</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="url" id="videoUrl" class="form-control" placeholder="https://youtube.com/shorts/... or https://youtu.be/..." required>
+                        <button type="button" id="autoFetchVideoBtn" class="btn" style="background: var(--gray-200); white-space: nowrap;">
+                            <i class="fas fa-magic"></i> Auto-Fetch
+                        </button>
+                    </div>
+                    <small style="color: var(--gray-500); font-size: 0.75rem;">Paste any YouTube or Shorts link; thumbnail will be automatically retrieved.</small>
+                </div>
+
+                <!-- Video Preview Box -->
+                <div id="videoPreviewContainer" style="display: none; margin-bottom: 1rem; padding: 0.75rem; background: var(--gray-50); border-radius: 0.5rem; align-items: center; gap: 1rem;">
+                    <img id="videoPreviewThumb" src="" alt="Thumbnail preview" style="width: 100px; height: 60px; object-fit: cover; border-radius: 0.375rem;">
+                    <div>
+                        <div id="videoPreviewId" style="font-size: 0.8rem; font-weight: 600; color: var(--gray-700);"></div>
+                        <span style="font-size: 0.75rem; color: #10b981;"><i class="fas fa-check-circle"></i> Valid YouTube Link</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="videoTitle">Video Title *</label>
+                    <input type="text" id="videoTitle" class="form-control" placeholder="e.g. Build a QR Code Generator in Python in 60s" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="videoCategory">Category *</label>
+                        <select id="videoCategory" class="form-control" required>
+                            <option value="shorts">Shorts</option>
+                            <option value="python">Python</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="react">React</option>
+                            <option value="ai">AI Tools</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="videoDuration">Duration</label>
+                        <input type="text" id="videoDuration" class="form-control" placeholder="e.g. 0:59 or 12:45" value="0:59">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="videoViews">Views Count / Display</label>
+                        <input type="text" id="videoViews" class="form-control" placeholder="e.g. 1.2K or 500" value="1.2K">
+                    </div>
+                    <div class="form-group">
+                        <label for="videoThumbnail">Custom Thumbnail URL</label>
+                        <input type="text" id="videoThumbnail" class="form-control" placeholder="Auto-populated from YouTube link">
+                    </div>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="videoIsNew" style="width: 18px; height: 18px; cursor: pointer;">
+                    <label for="videoIsNew" style="margin-bottom: 0; cursor: pointer;">Show "New" badge on card</label>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn" data-close="videoModal" style="background: var(--gray-200); color: var(--gray-700);">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveVideoBtn">Save Video</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin JavaScript Logic -->
+    <script src="admin.js"></script>
+</body>
+</html>

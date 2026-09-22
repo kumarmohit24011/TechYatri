@@ -1,0 +1,203 @@
+/* tutorials.css */
+
+/* Tutorials Section */
+.tutorials-section {
+    padding: 100px 0;
+}
+
+.tutorials-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+/* Tab Navigation */
+.tutorial-tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background-color: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    color: var(--light);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Tab Content */
+.tutorial-tabs {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Code Snippets */
+.code-snippet {
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--darker);
+}
+
+.snippet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.snippet-header span {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.copy-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: var(--primary-light);
+}
+
+pre {
+    margin: 0;
+    padding: 15px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    color: #e6e6e6;
+    line-height: 1.5;
+}
+
+/* Video Playlist */
+.video-playlist {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-playlist iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+/* Tutorial Cards */
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.tutorial-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.tutorial-image {
+    height: 160px;
+    overflow: hidden;
+}
+
+.tutorial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.tutorial-card:hover .tutorial-image img {
+    transform: scale(1.05);
+}
+
+.tutorial-content {
+    padding: 20px;
+}
+
+.tutorial-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.tutorial-content p {
+    color: var(--gray);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.tutorial-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--gray);
+    font-size: 0.8rem;
+}
+
+.tutorial-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tutorial-tabs-header {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}

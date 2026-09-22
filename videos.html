@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechYatri Videos | Programming Tutorials</title>
+    <meta name="description" content="Quick programming tutorials and coding shorts. Learn Python, JavaScript, React and more in 60 seconds!">
+    
+    <!-- Favicon & Styles -->
+    <link rel="icon" href="icons/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/videos.css">
+    
+    <!-- Firebase SDKs (Realtime Database) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+    <!-- Header (same as index.html) -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="gradient-text">Tech</span>Yatri
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="videos.html" class="active">Videos</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="tutorials.html">Tutorials</a>
+                    <a href="admin.html" style="color: #818cf8;"><i class="fas fa-cog"></i> Admin</a>
+                </div>
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Video Categories Section -->
+    <section class="video-categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Coding <span class="gradient-text">Shorts</span></h2>
+                <p>Quick programming tutorials you can watch in under 60 seconds</p>
+            </div>
+            
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All Videos</button>
+                <button class="tab-btn" data-category="python">Python</button>
+                <button class="tab-btn" data-category="javascript">JavaScript</button>
+                <button class="tab-btn" data-category="react">React</button>
+                <button class="tab-btn" data-category="ai">AI Tools</button>
+            </div>
+            
+            <div class="video-grid">
+                <!-- Video cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <iframe id="ytPlayer" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="main-footer">
+        <!-- Your existing footer content -->
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const videoGrid = document.querySelector('.video-grid');
+    const videoModal = document.getElementById('videoModal');
+    const closeModal = document.querySelector('.close-modal');
+    
+    // YouTube Shorts video data
+    let currentVideos = [
+        {
+            id: 1,
+            title: "Voice Se Note Likho! No Typing Needed 😍 | Day 27 Python App #pythoncode #coding #programming",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/sickTFokwOE/hqdefault.jpg",
+            url: "https://youtube.com/shorts/sickTFokwOE",
+            duration: "0:59",
+            views: "1K",
+            date: "1 day ago"
+        },
+        {
+            id: 2,
+            title: "Apna QR Code Banao Python Se 😎 | 3 Line Trick 🔥 | Day 26 | TechYatri #python #qrcode",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/f8-zK3q4hGU/hqdefault.jpg",
+            url: "https://youtube.com/shorts/f8-zK3q4hGU",
+            duration: "0:50",
+            views: "1.2K",
+            date: "2 days ago"
+        },
+        {
+            id: 3,
+            title: "Ek Prompt = Puri Website!? 🤯 | Rapplit AI Agent Magic #aitools #webdevelopment #pubgtournament",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/LjWkCuibrps/hqdefault.jpg",
+            url: "https://youtube.com/shorts/LjWkCuibrps",
+            duration: "0:58",
+            views: "1.5K",
+            date: "3 days ago"
+        },
+        {
+            id: 4,
+            title: "🔥 Connect Your App to Firebase Realtime Database in Minutes😱 Java /Kotlin #100daysofcode #coding",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/gcM5RV5xh-8/hqdefault.jpg",
+            url: "https://youtube.com/shorts/gcM5RV5xh-8",
+            duration: "0:59",
+            views: "2K",
+            date: "4 days ago"
+        },
+        {
+            id: 5,
+            title: "Quick !Build Your Own Chrome Extension (Beginner Project) #tech #windows #coding #tipsandtricks",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/aMZdMUlV1uQ/hqdefault.jpg",
+            url: "https://youtube.com/shorts/aMZdMUlV1uQ",
+            duration: "0:51",
+            views: "1.8K",
+            date: "5 days ago"
+        },
+        {
+            id: 6,
+            title: "🚀 Android To-Do App in 1 Minute – Day 23 Challenge #androidstudio #coding #androidapp #programming",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/doyhvJGqhtE/hqdefault.jpg",
+            url: "https://youtube.com/shorts/doyhvJGqhtE",
+            duration: "0:54",
+            views: "1.9K",
+            date: "6 days ago"
+        },
+        {
+            id: 7,
+            title: "Download 40 Images/Second! 😱 | Crazy Chrome Extension for Developers 🔥 #techyatri",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/-2aQthCXalA/hqdefault.jpg",
+            url: "https://youtube.com/shorts/-2aQthCXalA",
+            duration: "0:58",
+            views: "3K",
+            date: "1 week ago"
+        },
+        {
+            id: 8,
+            title: "✅ Python zip() Function Explained in 30 Seconds! | Day 20 #100daysofcode #python #pythonprogramming",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/-tMjTqgTczc/hqdefault.jpg",
+            url: "https://youtube.com/shorts/-tMjTqgTczc",
+            duration: "0:57",
+            views: "2.5K",
+            date: "1 week ago"
+        },
+        {
+            id: 9,
+            title: "My Portfolio in Progress: Sneak Peek! 🚧✨ #shorts #programming #javascript",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/yjwDMXIs_Kk/hqdefault.jpg",
+            url: "https://youtube.com/shorts/yjwDMXIs_Kk",
+            duration: "0:55",
+            views: "2.8K",
+            date: "1 week ago"
+        },
+        {
+            id: 10,
+            title: "Day 16: Built a Snake Game in Python! 🐍 #100DaysOfCode",
+            category: "shorts",
+            thumbnail: "https://img.youtube.com/vi/OHxOlOV0IoI/hqdefault.jpg",
+            url: "https://www.youtube.com/watch?v=OHxOlOV0IoI",
+            duration: "0:59",
+            views: "3.2K",
+            date: "1 week ago"
+        }
+    ];
+
+    let activeCategory = 'all';
+
+    // Real-time listener via Firebase Realtime Database
+    const db = window.db;
+    if (db) {
+        db.collection('videos').onSnapshot(snapshot => {
+            if (!snapshot.empty) {
+                const fetched = [];
+                snapshot.forEach(doc => {
+                    fetched.push({ id: doc.id, ...doc.data() });
+                });
+                currentVideos = fetched;
+                renderFiltered();
+            }
+        }, err => {
+            console.warn("Using default videos array:", err);
+        });
+    }
+
+    function renderFiltered() {
+        if (activeCategory === 'all') {
+            loadVideos(currentVideos);
+        } else {
+            const filtered = currentVideos.filter(v => (v.category || '').toLowerCase() === activeCategory.toLowerCase());
+            loadVideos(filtered);
+        }
+    }
+
+    // Load all videos initially
+    renderFiltered();
+
+    // Tab click event
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            activeCategory = this.dataset.category;
+            renderFiltered();
+        });
+    });
+
+    // Load videos into grid
+    function loadVideos(videos) {
+        videoGrid.innerHTML = '';
+        
+        videos.forEach(video => {
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card glass-card';
+            videoCard.innerHTML = `
+                <div class="video-thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="duration">${video.duration}</div>
+                </div>
+                <div class="video-info">
+                    <div class="category-tag ${video.category}">${video.category}</div>
+                    <h3>${video.title}</h3>
+                    <div class="stats">
+                        <span><i class="fas fa-eye"></i> ${video.views} views</span>
+                        <span><i class="far fa-calendar-alt"></i> ${video.date}</span>
+                    </div>
+                </div>
+            `;
+            
+            videoCard.addEventListener('click', () => openVideoModal(video.url));
+            videoGrid.appendChild(videoCard);
+        });
+    }
+
+    // Modal functions
+    function openVideoModal(url) {
+        const videoId = extractVideoId(url);
+        const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        document.getElementById('ytPlayer').src = embedUrl;
+        videoModal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+
+    function extractVideoId(url) {
+        // Extract YouTube video ID from various URL formats
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    closeModal.addEventListener('click', () => {
+        videoModal.style.display = "none";
+        document.getElementById('ytPlayer').src = "";
+        document.body.style.overflow = "auto";
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+            videoModal.style.display = "none";
+            document.getElementById('ytPlayer').src = "";
+            document.body.style.overflow = "auto";
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

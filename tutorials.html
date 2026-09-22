@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tutorials | TechYatri</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/tutorials.css" />
+</head>
+<body>
+
+    <!-- HEADER START -->
+   <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="gradient-text">Tech</span>Yatri
+                </a>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="videos.html">Videos</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="tutorials.html">Tutorials</a>
+                
+    
+                </div>
+ 
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+    <!-- HEADER END -->
+
+    <section class="tutorials-section">
+        <div class="container">
+            <h2>Learning Resources</h2>
+
+            <!-- Tab Buttons -->
+            <div class="tutorial-tabs-header">
+                <button data-tab="guides" class="tab-btn active">Guides</button>
+                <button data-tab="snippets" class="tab-btn">Snippets</button>
+                <button data-tab="playlist" class="tab-btn">Playlist</button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="tutorial-tabs">
+                <!-- Guides Tab -->
+                <div class="tab-content active" id="guides">
+                    <h3>Written Guides</h3>
+                    <p>Coming soon...</p>
+                </div>
+
+                <!-- Snippets Tab -->
+                <div class="tab-content" id="snippets">
+                    <h3>Code Snippets</h3>
+                    <div class="code-snippet">
+                        <div class="snippet-header">
+                            <span>Python • Data Processing</span>
+                            <button class="copy-btn">Copy</button>
+                        </div>
+<pre><code>import pandas as pd
+
+def clean_data(df):
+    """Clean dataframe by removing nulls and formatting"""
+    df = df.dropna()
+    df['date'] = pd.to_datetime(df['date'])
+    return df</code></pre>
+                    </div>
+                </div>
+
+                <!-- Playlist Tab -->
+                <div class="tab-content" id="playlist">
+                    <h3>Video Playlist</h3>
+                    <div class="video-playlist">
+                        <iframe src="https://www.youtube.com/playlist?list=PL2EqcLZN_L4TqFWQvv1GiE3Yz16o_HTfJ"
+                                title="100Days of Coding Journey #100daysofcode"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for tab switching -->
+    <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-tab');
+
+            // If playlist tab clicked, redirect
+            if (target === 'playlist') {
+                window.location.href = 'https://www.youtube.com/playlist?list=PL2EqcLZN_L4TqFWQvv1GiE3Yz16o_HTfJ';
+                return;
+            }
+
+            // Otherwise show content
+            tabButtons.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(tab => tab.classList.remove('active'));
+
+            btn.classList.add('active');
+            document.getElementById(target).classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>

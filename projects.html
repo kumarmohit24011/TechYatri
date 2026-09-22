@@ -1,0 +1,356 @@
+<!-- projects.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Code Projects</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/projects.css" />
+    <!-- Firebase SDKs (Realtime Database) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+    <!-- Header/Nav -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="gradient-text">Tech</span>Yatri
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="videos.html">Videos</a>
+                    <a href="projects.html" class="active">Projects</a>
+                    <a href="tutorials.html">Tutorials</a>
+                    <a href="admin.html" style="color: #818cf8;"><i class="fas fa-cog"></i> Admin</a>
+                </div>
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+<section class="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2>Code <span class="gradient-text">Projects</span></h2>
+            <p>Real-world applications of our tutorials</p>
+        </div>
+
+        <div class="project-grid">
+            <!-- Using a single placeholder image for all projects -->
+            <!-- Project titles taken from your video titles (sample) -->
+
+            <!-- Project 1 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project1/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">Pandas</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>How to Build a Password Manager in Python</h3>
+                    <p>Complete guide to build a secure password manager app</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project2/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Firebase</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>React Firebase Authentication Tutorial</h3>
+                    <p>Step-by-step to implement login/signup with Firebase</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project3/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">scikit-learn</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Machine Learning Model Deployment</h3>
+                    <p>Deploy your ML model as a web app using Flask</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project4/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">API</span>
+                        <span class="tech-tag">Chart.js</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Live Crypto Price Tracker App</h3>
+                    <p>Track cryptocurrency prices using public APIs and charts</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project5/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">GSAP</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Build a Drag & Drop Portfolio Builder</h3>
+                    <p>Create stunning developer portfolios with animations</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project6/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Dart</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>AI-Powered Fitness Coach App</h3>
+                    <p>Pose detection to improve workout routines</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project7/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">D3.js</span>
+                        <span class="tech-tag">Express</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Social Media Analytics Dashboard</h3>
+                    <p>Visualize engagement metrics across platforms</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project8/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pygame</span>
+                        <span class="tech-tag">OpenGL</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Creating a 2D Platformer Game</h3>
+                    <p>Build retro-style game mechanics with scoring system</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 9 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project9/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">CI/CD</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>DevOps Automation Pipelines</h3>
+                    <p>Set up pre-configured CI/CD pipelines for your projects</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 10 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/seed/project10/400/250" alt="Project Image" />
+                    <div class="tech-stack">
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">AR.js</span>
+                        <span class="tech-tag">WebXR</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Web-Based Augmented Reality Demo</h3>
+                    <p>Create markerless AR experiences in browsers</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/@thetechyatri?si=_Cy0zNMT9gdH_xsc" class="link-button" target="_blank" rel="noopener">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager" class="link-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Dynamic Projects Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        const db = window.db;
+        if (db) {
+            const projectGrid = document.querySelector('.project-grid');
+            db.collection('projects').onSnapshot(snapshot => {
+                if (!snapshot.empty && projectGrid) {
+                    const projects = [];
+                    snapshot.forEach(doc => projects.push({ id: doc.id, ...doc.data() }));
+                    
+                    projectGrid.innerHTML = projects.map(p => {
+                        let tags = [];
+                        if (Array.isArray(p.techStack)) {
+                            tags = p.techStack;
+                        } else if (typeof p.techStack === 'string') {
+                            tags = p.techStack.split(',').map(s => s.trim()).filter(Boolean);
+                        }
+                        const img = p.image || 'images/password_manager.jpeg';
+                        return `
+                        <div class="project-card glass-card">
+                            <div class="project-image">
+                                <img src="${img}" alt="${p.title}" loading="lazy" onerror="this.src='images/password_manager.jpeg'">
+                                <div class="tech-stack">
+                                    ${tags.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <h3>${p.title}</h3>
+                                <p>${p.description || ''}</p>
+                                <div class="project-links">
+                                    ${p.tutorialLink ? `<a href="${p.tutorialLink}" class="link-button" target="_blank" rel="noopener"><i class="fas fa-video"></i> Tutorial</a>` : ''}
+                                    ${p.codeLink ? `<a href="${p.codeLink}" class="link-button" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }).join('');
+                }
+            }, err => console.warn("Using default static projects:", err));
+        }
+    });
+    </script>
+</body>
+</html>

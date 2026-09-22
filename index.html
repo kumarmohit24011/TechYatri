@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechYatri | Programming & Tech Tutorials</title>
+    <meta name="description" content="Premium programming tutorials on Python, JavaScript, React, AI and more. Join the TechYatri community today!">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="icons/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/particles.css">
+
+    
+    <!-- JS Libraries (Firebase Realtime Database) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+    <!-- Header/Nav -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="gradient-text">Tech</span>Yatri
+                </a>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="videos.html">Videos</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="tutorials.html">Tutorials</a>
+                    <a href="admin.html" style="color: #818cf8;"><i class="fas fa-cog"></i> Admin</a>
+                     <a href="#contact" class="btn small">Contact</a>
+                </div>
+ 
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    <span class="gradient-text">Code</span> Your Future 
+                    <span class="typed" data-typed-items="With TechYatri, With Python, With React, With AI"></span>
+                </h1>
+                <p class="subtitle">Cutting-edge programming tutorials that transform beginners into tech professionals</p>
+                
+                <div class="cta-container">
+                    <a href="#featured" class="cta-button pulse">
+                        <i class="fas fa-play"></i> Explore Videos
+                    </a>
+                    <a href="https://youtube.com/@thetechyatri?si=8doBmtIvmXTtdv8n" class="cta-button secondary" target="_blank">
+                        <i class="fab fa-youtube"></i> Subscribe Now
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="code-window">
+                    <div class="window-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="window-content">
+                        <pre><code class="language-python"># Welcome to TechYatri
+def transform_career():
+    tutorials = load_playlists()
+    skills = ["Python", "React", "AI"]
+    for skill in skills:
+        mastery = tutorials[skill].complete()
+        return mastery</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-down">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Videos -->
+    <section class="video-showcase" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured <span class="gradient-text">Content</span></h2>
+                <p>Handpicked tutorials to boost your skills</p>
+            </div>
+            
+    <div class="glide video-carousel">
+    <div class="glide__track" data-glide-el="track">
+        <div class="glide__slides">
+            <!-- Video 1 -->
+            <div class="glide__slide">
+                <div class="video-card glass-card">
+                    <div class="video-badge">New</div>
+                    <div class="video-thumbnail">
+                        <img src="images/Made with insMind-ChatGPT Image May 17, 2025, 02_01_53 PM.png" alt="Python AI Tutorial">
+                        <a href="https://youtu.be/a9z4ilW7YB8" target="_blank" class="play-button">
+                            <i class="fas fa-play"></i>
+                        </a>
+                        <div class="duration">12:45</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="category-tag python">Python</div>
+                        <h3>Why Vibe Coding 🎧is the BEST Way to Program💻 (Relaxed & Productive)</h3>
+                        <div class="stats">
+                            <span><i class="fas fa-eye"></i> 26 views</span>
+                            <span><i class="far fa-calendar-alt"></i> 20 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video 2 -->
+            <div class="glide__slide">
+                <div class="video-card glass-card">
+                    <div class="video-thumbnail">
+                        <img src="images/all_images_from_a_webpage.jpeg" alt="React Tutorial">
+                        <a href="https://youtube.com/shorts/-2aQthCXalA?feature=share" target="_blank" class="play-button">
+                            <i class="fas fa-play"></i>
+                        </a>
+                        <div class="duration">15:30</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="category-tag react">React</div>
+                        <h3>Download 40 Images/Second! 😱 | Crazy Chrome Extension for Developers 🔥</h3>
+                        <div class="stats">
+                            <span><i class="fas fa-eye"></i> 2.6K views</span>
+                            <span><i class="far fa-calendar-alt"></i> 1 week ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="glide__slide">
+                <div class="video-card glass-card">
+                    <div class="video-thumbnail">
+                        <img src="images/create_qr_code_with_python.jpeg" alt="React Tutorial">
+                        <a href="https://youtube.com/shorts/f8-zK3q4hGU?feature=share" target="_blank" class="play-button">
+                            <i class="fas fa-play"></i>
+                        </a>
+                        <div class="duration">15:30</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="category-tag react">React</div>
+                        <h3>Apna QR Code Banao Python Se 😎 | 3 Line Trick 🔥 | Day 26 | TechYatri</h3>
+                        <div class="stats">
+                            <span><i class="fas fa-eye"></i> 1k views</span>
+                            <span><i class="far fa-calendar-alt"></i> 1 week ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
+    </div>
+</div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack-section">
+        <div class="container">
+            <div class="section-header center">
+                <h2>Master the <span class="gradient-text">Tech Stack</span></h2>
+                <p>Comprehensive learning paths for modern technologies</p>
+            </div>
+            
+            <div class="tech-radar">
+                <div class="radar-grid">
+                    <div class="radar-item" style="--i:1">
+                        <div class="tech-icon">
+                            <img src="icons/python.svg" alt="Python">
+                        </div>
+                        <div class="tech-info">
+                            <h3>Python</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="radar-item" style="--i:2">
+                        <div class="tech-icon">
+                            <img src="icons/javascript.svg" alt="JavaScript">
+                        </div>
+                        <div class="tech-info">
+                            <h3>JavaScript</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="radar-item" style="--i:3">
+                        <div class="tech-icon">
+                            <img src="icons/physics.png" alt="JavaScript">
+                        </div>
+                        <div class="tech-info">
+                            <h3>React</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- More tech items -->
+                </div>
+                
+               
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+   <section class="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2>Code <span class="gradient-text">Projects</span></h2>
+            <p>Real-world applications of our tutorials</p>
+        </div>
+        
+        <div class="project-grid">
+            <!-- Project 1 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="images/password_manager.jpeg" alt="Password Manager">
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">Pandas</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>🔐 I Built a SECURE Password Manager in 10 mins!</h3>
+                    <p>Secure password manager. Check out the code on GitHub.</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/shorts/tydOVBhDdGw?feature=share" class="link-button">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager/blob/main/main.py" class="link-button">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card glass-card">
+                <div class="project-image">
+                    <img src="images/music_player.jpeg" alt="Music Player">
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">API</span>
+                        <span class="tech-tag">Tkinter</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>🚀 Build a Music Player in Python in 60 Seconds! 🎵🔥</h3>
+                    <p>Music player with API. Full code on GitHub, check it out!</p>
+                    <div class="project-links">
+                        <a href="https://youtube.com/shorts/jWaYIAyL0K4?feature=share" class="link-button">
+                            <i class="fas fa-video"></i> Tutorial
+                        </a>
+                        <a href="https://github.com/kumarmohit24011/Music-Player" class="link-button">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="center">
+            <a href="projects.html" class="btn primary">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header center">
+                <h2>What Our <span class="gradient-text">Viewers</span> Say</h2>
+                <p>Success stories from our community</p>
+            </div>
+            
+            <div class="testimonial-carousel">
+                <!-- Testimonial slides -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-box glass-card">
+                <div class="newsletter-content">
+                    <h3>Join Our Tech Community</h3>
+                    <p>Get exclusive content, early access to videos, and coding resources</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer" id="contact">
+
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo">
+                        <span class="gradient-text">Tech</span>Yatri
+                    </a>
+                    <p>Empowering developers through high-quality programming tutorials and tech education.</p>
+                    <div class="social-links">
+                        <a href="https://youtube.com/@thetechyatri?si=66l2Y6DTJMMqY5fu"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/kumarmohit24011/Password-Manager"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Content</h4>
+                    <ul>
+                        <li><a href="videos.html">Video Tutorials</a></li>
+                        <li><a href="projects.html">Code Projects</a></li>
+                        <li><a href="tutorials.html">Learning Guides</a></li>
+                        <li><a href="#">Coding Challenges</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Cheat Sheets</a></li>
+                        <li><a href="#">Roadmaps</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="admin.html">Admin Portal</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 TechYatri. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+</html>
